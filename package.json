@@ -1,0 +1,28 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanIvanov3000/RealEstateAgency.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IvanIvanov3000/RealEstateAgency/issues"
+  },
+  "homepage": "https://github.com/IvanIvanov3000/RealEstateAgency#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.4",
+    "path": "^0.12.7"
+  }
+}
