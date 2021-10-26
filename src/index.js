@@ -1,18 +1,22 @@
 const express = require('express');
 
+const { PORT } = require('../constants');
+const routes = require('./routes');
 
-const  hbsConfig  = require('./config/hbsConfig');
+const initDatabase = require("./config/databaseConfig");
+const hbsConfig = require('./config/hbsConfig');
 const expressConfig = require('./config/expressConfig');
 
 const app = express();
-const {PORT} = require('../constants');
 
 hbsConfig(app);
 expressConfig(app);
+app.use(routes);
 
-app.get('/', (req, res) => {
-    res.render("home/index");
-});
+initDatabase()
+    .then(() => {
+        app.listen(PORT, () => console.log(`Listening on  http://localhost:${PORT}...`));
+    }).catch(err => {
+        console.log("Cannon connect database:", err);
+    });
 
-
-app.listen(PORT, () => console.log(`Listening on  http://localhost:${PORT}...`));
