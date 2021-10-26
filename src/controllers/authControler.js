@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const authService = require('../services/authService');
+const { AUTH_COOKIE_NAME } = require("../../constants");
+
 
 router.get('/register', (req, res) => {
     res.render("auth/register");
@@ -19,19 +21,22 @@ router.post('/register', async (req, res) => {
     try {
         let user = await authService.register({ username, password, name, rePass })
         res.redirect("/");
-    }catch(err){
+    } catch (err) {
         throw new Error(err);
     }
 });
 router.post("/login", async (req, res) => {
-    const { username, password, name } = req.body;
-
-    if (username == "" || password == "") {
-        return res.render("auth/register", { username, name });
-    }
     try {
-        let token = await authService.login({ username, password });
+        const { username, password } = req.body;
         
+
+        if (username == "" || password == "") {
+            return res.render("auth/login", { username });
+        }
+
+        let token = await authService.login({ username, password });
+        console.log(token);
+        res.cookie(AUTH_COOKIE_NAME, token);
         res.redirect("/");
     } catch (err) {
         throw new Error(err.message);
