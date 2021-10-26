@@ -7,7 +7,7 @@ const { ACCESS_TOKEN_SECRET } = require("../../constants");
 exports.login = async ({ username, password }) => {
     try {
         let user = await User.findOne({ username });
-        console.log(user);
+
         if (!user) {
             throw new Error('User or password not matching. Check your username and password.');
         }

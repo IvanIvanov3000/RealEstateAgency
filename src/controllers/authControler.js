@@ -28,15 +28,16 @@ router.post('/register', async (req, res) => {
 router.post("/login", async (req, res) => {
     try {
         const { username, password } = req.body;
-        
+
 
         if (username == "" || password == "") {
             return res.render("auth/login", { username });
         }
 
         let token = await authService.login({ username, password });
-        console.log(token);
+
         res.cookie(AUTH_COOKIE_NAME, token);
+
         res.redirect("/");
     } catch (err) {
         throw new Error(err.message);
