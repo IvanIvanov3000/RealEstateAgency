@@ -10,6 +10,6 @@ router.get("/create", (req, res) => {
 router.post("/create", async (req, res) => {
     console.log(req.body);
     await housingService.create(req.body);
-    res.redirect("/");
+    res.redirect("/housing");
 })
 module.exports = router;

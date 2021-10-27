@@ -7,7 +7,7 @@ const housingSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true,
-        enum: ["Apartment", "Vila", "House"]
+        enum: ["Apartment", "Villa", "House"]
     },
     image: {
         type: String,
