@@ -19,7 +19,10 @@ router.post('/register', async (req, res) => {
         return res.render("auth/register", { username, name });
     }
     try {
-        let user = await authService.register({ username, password, name, rePass })
+        await authService.register({ username, password, name, rePass });
+        const token = await authService.login({ username, password });
+        res.cookie(AUTH_COOKIE_NAME, token);
+
         res.redirect("/");
     } catch (err) {
         throw new Error(err);
@@ -44,6 +47,9 @@ router.post("/login", async (req, res) => {
     }
 
 
-})
-
+});
+router.get("/logout", (req, res) => {
+    res.clearCookie(AUTH_COOKIE_NAME);
+    res.redirect("/");
+});
 module.exports = router;

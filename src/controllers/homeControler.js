@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 
 router.get('/', (req, res) => {
-    console.log(req.user);
+    res.locals.title = "Home Page";
     res.render("home/index");
 });
 
