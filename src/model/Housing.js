@@ -28,9 +28,21 @@ const housingSchema = new mongoose.Schema({
     year: {
         type: Number,
         required: true
-    }
+    },
+    owner: {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+    },
+    tenants: [{
+        type: mongoose.Types.ObjectId,
+        ref: "User"
+    }]
 
-})
+}, { timestamps: true });
+
+housingSchema.method("getTenants", function(){
+    return this.tenants.map(x => x.name).join(", ");
+});
 
 const Housing = mongoose.model('Housing', housingSchema);
 module.exports = Housing;

@@ -9,5 +9,7 @@ const housingRouter = require('./controllers/housingControler');
 router.use(homeRouter);
 router.use("/auth", authRouter);
 router.use("/housing", housingRouter);
-
+router.use("*", (req, res) =>{ 
+    res.render("404");
+})
 module.exports = router;

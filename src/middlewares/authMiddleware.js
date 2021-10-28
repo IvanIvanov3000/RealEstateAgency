@@ -27,3 +27,10 @@ exports.isAuth = function (req, res, next) {
         res.redirect("auth/login");
     }
 }
+exports.isGuest = function (req, res, next) {
+    if (req.user) {
+        res.render("404");
+    } else {
+        next();
+    }
+}
